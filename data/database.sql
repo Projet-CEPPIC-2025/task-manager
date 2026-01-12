@@ -18,3 +18,24 @@ VALUES
 ('Lucas', 'Bernard', 'lucas.bernard@example.com', '0600000004', '$2b$10$0Tm1Tm4Tm4Tm4Tm4Tm4TmO4Tm4Tm4Tm4Tm4Tm4Tm4Tm4Tm4Tm4Tm', 'vendeur', 'active'),
 ('Emma', 'Petit', 'emma.petit@example.com', '0600000005', '$2b$10$1Un2Un5Un5Un5Un5Un5UnO5Un5Un5Un5Un5Un5Un5Un5Un5Un5Un', 'stagiaire', 'active'),
 ('Paul', 'Dubois', 'paul.dubois@example.com', '0600000006', '$2b$10$2Vo3Vo6Vo6Vo6Vo6Vo6VoO6Vo6Vo6Vo6Vo6Vo6Vo6Vo6Vo6Vo6Vo', 'responsable', 'active');
+CREATE TABLE comments (
+    id_comment INT AUTO_INCREMENT PRIMARY KEY,
+
+    task_id INT NOT NULL,
+    employe_id INT NOT NULL,
+
+    content TEXT NOT NULL,
+
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    -- relations
+    CONSTRAINT fk_comment_task
+        FOREIGN KEY (task_id)
+        REFERENCES tasks(id_task)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_comment_employe
+        FOREIGN KEY (employe_id)
+        REFERENCES employes(id_employe)
+        ON DELETE CASCADE
+);
